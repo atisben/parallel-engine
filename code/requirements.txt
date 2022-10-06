@@ -1,0 +1,9 @@
+
+google-cloud-bigquery==3.3.2
+colorama==0.4.5
+pygments-pprint-sql==0.1.0
+google-cloud-storage==2.5.0
+google-auth==2.11.1
+pandas==1.5.0
+google-api-core==2.10.1
+google-cloud-compute==1.6.0
