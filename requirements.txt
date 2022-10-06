@@ -1,0 +1,2 @@
+google-api-python-client==2.64.0
+PyYAML==6.0

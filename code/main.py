@@ -10,8 +10,10 @@ from google.cloud import bigquery
 # Parse command line arguments
 parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
 parser.add_argument("-p", "--project", type=str, help="id of the GCP project")
-parser.add_argument("-d", "--dataset", type=str, help="name of the output BigQuery dataset")
+parser.add_argument("-d", "--dataset", type=str, help="name of the output BigQuery dataset", default="parallel_engine")
+parser.add_argument("-t", "--table", type=str, help="name of the BigQuery table", default = "logs")
 parser.add_argument("-v", "--var", type=int, help="any variable to be reflected in the output")
+
 args = vars(parser.parse_args())
 
 

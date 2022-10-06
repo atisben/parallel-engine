@@ -19,6 +19,24 @@ Run the following command to connect to GCP. If you are running the command on a
 
 Follow the instructions and login to your GCP project
 
+## Set up the environment variables
+
+Make sure you've created a `.config.yaml` file in the root directory
+This yaml file shoud at least contain the folowing values
+set environment variables
+```yaml
+PROJECT_ID: your project
+ZONE: your zone
+MACHINE_TYPE: machine type
+VM_QUOTAS: max number of machines on the project
+```
+
+## install all the dependencies
+
+```sh
+pip install -r requirements.txt
+```
+
 ## Cloud build push docker image
 
 Cloud Build is used to push the docker image in Google Container Registry.
@@ -26,23 +44,12 @@ Run the following command to push the docker image to gcr
 
 ```sh
 gcloud builds submit \
---project <my_project>
+--project ${PROJECT_ID}
 ```
 
-set environment variables
-```
-export PROJECT_ID = my_project
-```
+## Local debbuging
 
-```
+```sh
 docker-credential-gcr configure-docker 
-docker run <image uri> --project <my_project> --dataset <my_dataset>
-#TODO remove 
-docker run gcr.io/io-leroy-merlin-mmm/job-runner:latest --project io-leroy-merlin-mmm --dataset test
-```
-
-
-create the network 
-```
-gcloud compute networks create default-vm --subnet-mode automatic
+docker run ${IMAGE_URI} --project ${PROJECT_ID} --dataset ${DATASET}
 ```
