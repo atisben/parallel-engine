@@ -11,8 +11,12 @@ sudo apt install --yes docker-ce
 
 # Get access token
 docker login -u oauth2accesstoken -p "$(gcloud auth print-access-token)" https://gcr.io
+
+
 # Run docker container
+# [UPDATE HERE]
 sudo docker run gcr.io/{project}/job-runner:latest --project {project} --dataset {dataset} --var {var}
+
 
 # Delete the compute engine
 gcloud compute instances delete {instance_name} --zone {zone}

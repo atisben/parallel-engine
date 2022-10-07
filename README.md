@@ -84,3 +84,14 @@ To check if your docker image works properly, run the following command in googl
 docker-credential-gcr configure-docker 
 docker run ${IMAGE_URI} --project ${PROJECT_ID} --dataset ${DATASET}
 ```
+
+
+Check the compute engine real time logs
+```sh
+gcloud compute --project=${PROJECT} instances get-serial-port-output ${INSTANCE_NAME} --zone=${ZONE} --port=1
+```
+
+## Warnings!
+
+A docker run issue implies that the machine won't stop on it's own. 
+Please make sure to manually stop any machine that have failed running the docker container
