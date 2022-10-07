@@ -25,7 +25,7 @@ provider "google" {
 
 locals {
 
-  vertex_ai_parallelizer_sa  = "serviceAccount:${google_service_account.vertex_ai_parallelizer.email}"
+  vertex_ai_parallelizer_sa  = "serviceAccount:${google_service_account.docker_parallelizer.email}"
 }
 
 # Enable services
@@ -36,20 +36,20 @@ resource "google_project_service" "iam" {
 }
 
 # Create a service account
-resource "google_service_account" "vertex_ai_parallelizer" {
-  account_id   = "vertex-ai-parallelizer"
-  display_name = "vertexAI SA"
-  description  = "Identity used by a vertexAI service tu run custom jobs"
+resource "google_service_account" "docker_parallelizer" {
+  account_id   = "docker-parallelizer"
+  display_name = "docker parallelizer SA"
+  description  = "Identity used by a compute engine service tu run docker container on multiple machines"
 }
 
 
 # Set permissions
 resource "google_project_iam_binding" "service_permissions" {
   for_each = toset([
-    "bigquery.Admin", "storage.objectAdmin", "aiplatform.user"
+    "bigquery.Admin", "storage.objectAdmin", "compute.admin"
   ])
 
   role       = "roles/${each.key}"
-  members    = [local.vertex_ai_parallelizer_sa]
-  depends_on = [google_service_account.vertex_ai_parallelizer]
+  members    = [local.docker_parallelizer]
+  depends_on = [google_service_account.docker_parallelizer]
 }
